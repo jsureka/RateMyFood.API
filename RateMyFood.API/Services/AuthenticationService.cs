@@ -12,10 +12,13 @@ namespace RateMyFood.API.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
+        #region fields
         private readonly IConfiguration _configuration;
         private readonly IAuthenticationRepository _authenticationRepository;
         private readonly IPasswordHasher<User> _passwordHasher;
+        #endregion
 
+        #region constructor
         public AuthenticationService(IConfiguration configuration, 
             IAuthenticationRepository authenticationRepository,
             IPasswordHasher<User> passwordHasher)
@@ -24,7 +27,9 @@ namespace RateMyFood.API.Services
             this._authenticationRepository = authenticationRepository;
             this._passwordHasher = passwordHasher;
         }
+        #endregion
 
+        #region authenticateUser
         public async Task<string> AuthenticateUserAsync(string username, string password)
         {
             var user = await _authenticationRepository.Get(username);
@@ -60,45 +65,70 @@ namespace RateMyFood.API.Services
             var tokenToReturn = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
             return tokenToReturn;
         }
+        #endregion
 
+        #region deleteUser
         public void DeleteUser(string id)
         {
             _authenticationRepository.Delete(id);
         }
+        #endregion
 
-        public Task<User> RegisterUserAsync(User user)
+        #region get all users
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
+        {
+            return await _authenticationRepository.Get();
+        }
+        #endregion
+
+        #region get single user
+        public async Task<User> GetUserAsync(string id)
+        {
+            return await _authenticationRepository.GetById(id);
+        }
+        #endregion
+
+        #region registerUser
+        public async Task<bool> RegisterUserAsync(User user)
         {
          
             if(user == null)
             {
-                throw new ArgumentNullException("user value is null");
+                throw new BadHttpRequestException("user value is null");
             }
 
             if (_authenticationRepository.UserExists(
                 user.Email, user.UserName))
             {
-                throw new ArgumentException("User already Exists");
+                throw new BadHttpRequestException("User already Exists");
             }
             user.Password =
                 _passwordHasher.HashPassword(user, user.Password);
-             _authenticationRepository.Add(user);
-            return Task.FromResult(user);
+            _authenticationRepository.Add(user);
+            await _authenticationRepository.SaveChangesAsync();
+            return true;
         }
+        #endregion
 
+        #region savechanges
         public async Task<bool> SaveChangesAsync()
         {
             return await _authenticationRepository.SaveChangesAsync();
         }
+        #endregion
 
-        public async Task<bool> UpdateUserAsync(UserToUpdate userToUpdate)
+        #region updateUser
+        public async Task<bool> UpdateUserAsync(UserToUpdate userToUpdate, string id)
         {
             if( _authenticationRepository.UserExists(userToUpdate.Email, 
                 userToUpdate.UserName))
             {
                 throw new Exception("Username or Email not Unique");
             }
-            await _authenticationRepository.Update(userToUpdate);
+            await _authenticationRepository.Update(userToUpdate, id);
+            await SaveChangesAsync();
             return true;
         }
+        #endregion
     }
 }

@@ -12,8 +12,8 @@ using RateMyFood.API.DbContexts;
 namespace RateMyFood.API.Migrations
 {
     [DbContext(typeof(RateMyFoodContext))]
-    [Migration("20230122133842_InitialUserMigration")]
-    partial class InitialUserMigration
+    [Migration("20230123094102_SeedUserData")]
+    partial class SeedUserData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -9,9 +9,9 @@ namespace RateMyFood.API.Repositories
         void Add(User user);
         Task<List<User>> Get();
         Task<User> Get(string username);
-        Task<bool> Update(UserToUpdate userToUpdate);
+        Task<bool> Update(UserToUpdate userToUpdate, string id);
         void Delete(string id);
-        Task<User> GetById(Guid id);
+        Task<User> GetById(string id);
         bool UserExists(string email, string username);
         Task<bool> SaveChangesAsync();
     }

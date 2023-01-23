@@ -6,15 +6,13 @@ namespace RateMyFood.API.DbContexts
 {
     public class RateMyFoodContext : DbContext
     {
-        private readonly IPasswordHasher<User> _passwordHasher;
 
         public DbSet<User> Users { get; set; } = null!;
         //public DbSet<Restaurants> PointsOfInterest { get; set; } = null!;
 
-        public RateMyFoodContext(DbContextOptions<RateMyFoodContext> options, IPasswordHasher<User> passwordHasher)
+        public RateMyFoodContext(DbContextOptions<RateMyFoodContext> options)
             : base(options)
         {
-            this._passwordHasher = passwordHasher;
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -46,7 +44,7 @@ namespace RateMyFood.API.DbContexts
                     Id = Guid.Parse("24810dfc-2d94-4cc7-aab5-cdf98b83f0c9"),
                     UserName = "emma",
                     Password = "password",
-Email = "emma@provider.com",
+                    Email = "emma@provider.com",
                     FirstName = "Emma",
                     LastName = "Flagg",
                     Role = "General"

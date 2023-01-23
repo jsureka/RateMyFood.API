@@ -12,13 +12,13 @@ namespace RateMyFood.API.Repositories
 
         public AuthenticationRepository(RateMyFoodContext rateMyFoodContext)
         {
-            this._rateMyFoodContext = rateMyFoodContext;
+            _rateMyFoodContext = rateMyFoodContext;
         }
 
 
-        public async void Add(User user)
+        public void Add(User user)
         {
-            await _rateMyFoodContext.Users.AddAsync(user);
+             _rateMyFoodContext.Users.Add(user);
         }
 
         public async void Delete(string id)
@@ -44,6 +44,7 @@ namespace RateMyFood.API.Repositories
             return await _rateMyFoodContext.Users.ToListAsync();
 #pragma warning restore CS8603 // Possible null reference return.
         }
+
         public async Task<User> GetById(string id)
         {
 #pragma warning disable CS8603 // Possible null reference return.
@@ -52,30 +53,32 @@ namespace RateMyFood.API.Repositories
 #pragma warning restore CS8603 // Possible null reference return.
         }
 
-        public async Task<bool> SaveChangesAsync()
-        {
-            return (await _rateMyFoodContext.SaveChangesAsync() >= 0);
-        }
-
         public async Task<bool> Update(UserToUpdate userToUpdate, string id)
         {
-            var res =  _rateMyFoodContext.Users.
+            var res = _rateMyFoodContext.Users.
                 Where(c => c.Id.ToString() == id).FirstOrDefault();
-            if(res != null)
+            if (res != null)
             {
                 res.UserName = userToUpdate.UserName;
                 res.FirstName = userToUpdate.FirstName;
                 res.LastName = userToUpdate.LastName;
                 res.Email = userToUpdate.Email;
-               await _rateMyFoodContext.SaveChangesAsync();
+                await _rateMyFoodContext.SaveChangesAsync();
             }
             return true;
         }
 
         public bool UserExists(string email, string username)
         {
-            return  _rateMyFoodContext.Users.Any( 
+            return _rateMyFoodContext.Users.Any(
                 c => c.UserName == username || c.Email == email);
         }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _rateMyFoodContext.SaveChangesAsync() >= 0);
+        }
+
+
     }
 }
