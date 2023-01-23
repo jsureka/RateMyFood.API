@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RateMyFood.API.Dtos;
 using RateMyFood.API.Entities;
 
 namespace RateMyFood.API.Repositories
@@ -8,10 +9,10 @@ namespace RateMyFood.API.Repositories
         void Add(User user);
         Task<List<User>> Get();
         Task<User> Get(string username);
-        Task<IActionResult> Update();
-        void Delete(Guid id);
+        Task<bool> Update(UserToUpdate userToUpdate);
+        void Delete(string id);
         Task<User> GetById(Guid id);
-        bool UserExists(User user);
+        bool UserExists(string email, string username);
         Task<bool> SaveChangesAsync();
     }
 }

@@ -49,6 +49,13 @@ namespace RateMyFood.API.Controllers
         #endregion
 
         #region update
+        [HttpPut("udpate")]
+        public async Task<IActionResult> Update(UserToUpdate userToUpdate)
+        {
+            var res = await _authenticationService.UpdateUserAsync(userToUpdate);
+
+            return Ok();
+        }
         #endregion
 
         #region delete

@@ -61,6 +61,11 @@ namespace RateMyFood.API.Services
             return tokenToReturn;
         }
 
+        public void DeleteUser(string id)
+        {
+            _authenticationRepository.Delete(id);
+        }
+
         public Task<User> RegisterUserAsync(User user)
         {
          
@@ -69,7 +74,8 @@ namespace RateMyFood.API.Services
                 throw new ArgumentNullException("user value is null");
             }
 
-            if (_authenticationRepository.UserExists(user))
+            if (_authenticationRepository.UserExists(
+                user.Email, user.UserName))
             {
                 throw new ArgumentException("User already Exists");
             }
@@ -82,6 +88,17 @@ namespace RateMyFood.API.Services
         public async Task<bool> SaveChangesAsync()
         {
             return await _authenticationRepository.SaveChangesAsync();
+        }
+
+        public async Task<bool> UpdateUserAsync(UserToUpdate userToUpdate)
+        {
+            if( _authenticationRepository.UserExists(userToUpdate.Email, 
+                userToUpdate.UserName))
+            {
+                throw new Exception("Username or Email not Unique");
+            }
+            await _authenticationRepository.Update(userToUpdate);
+            return true;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RateMyFood.API.DbContexts;
+using RateMyFood.API.Dtos;
 using RateMyFood.API.Entities;
 
 namespace RateMyFood.API.Repositories
@@ -20,9 +21,11 @@ namespace RateMyFood.API.Repositories
             await _rateMyFoodContext.Users.AddAsync(user);
         }
 
-        public void Delete(Guid id)
+        public async void Delete(string id)
         {
-            _rateMyFoodContext.Remove(id);
+            var user = await GetById(id);
+            if(user != null)
+            _rateMyFoodContext.Users.Remove(user);
         }
 
         public async Task<User> Get(string username)
@@ -41,10 +44,10 @@ namespace RateMyFood.API.Repositories
             return await _rateMyFoodContext.Users.ToListAsync();
 #pragma warning restore CS8603 // Possible null reference return.
         }
-        public async Task<User> GetById(Guid id)
+        public async Task<User> GetById(string id)
         {
 #pragma warning disable CS8603 // Possible null reference return.
-            return await _rateMyFoodContext.Users.Where(c => c.Id == id)
+            return await _rateMyFoodContext.Users.Where(c => c.Id.ToString() == id)
                 .FirstOrDefaultAsync();
 #pragma warning restore CS8603 // Possible null reference return.
         }
@@ -54,15 +57,25 @@ namespace RateMyFood.API.Repositories
             return (await _rateMyFoodContext.SaveChangesAsync() >= 0);
         }
 
-        public Task<IActionResult> Update()
+        public async Task<bool> Update(UserToUpdate userToUpdate, string id)
         {
-            throw new NotImplementedException();
+            var res =  _rateMyFoodContext.Users.
+                Where(c => c.Id.ToString() == id).FirstOrDefault();
+            if(res != null)
+            {
+                res.UserName = userToUpdate.UserName;
+                res.FirstName = userToUpdate.FirstName;
+                res.LastName = userToUpdate.LastName;
+                res.Email = userToUpdate.Email;
+               await _rateMyFoodContext.SaveChangesAsync();
+            }
+            return true;
         }
 
-        public bool UserExists(User user)
+        public bool UserExists(string email, string username)
         {
             return  _rateMyFoodContext.Users.Any( 
-                c => c.UserName == user.UserName || c.Email == user.Email);
+                c => c.UserName == username || c.Email == email);
         }
     }
 }
