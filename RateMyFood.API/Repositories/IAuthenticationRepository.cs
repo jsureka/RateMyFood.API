@@ -5,10 +5,13 @@ namespace RateMyFood.API.Repositories
 {
     public interface IAuthenticationRepository
     {
-        Task<IActionResult> Add(User user);
-        Task<IActionResult> Get(string username, string password);
+        void Add(User user);
+        Task<List<User>> Get();
+        Task<User> Get(string username);
         Task<IActionResult> Update();
-        Task<IActionResult> Delete(Guid id);
-        Task<IActionResult> GetById(Guid id);
+        void Delete(Guid id);
+        Task<User> GetById(Guid id);
+        bool UserExists(User user);
+        Task<bool> SaveChangesAsync();
     }
 }

@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using RateMyFood.API.DbContexts;
+using RateMyFood.API.Repositories;
+using RateMyFood.API.Services;
 using Serilog;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
@@ -47,6 +49,8 @@ internal static class HostingExtensions
         builder.Services.AddScoped<IPasswordHasher<Entities.User>,PasswordHasher<Entities.User>>();
         //// register the repository
         //builder.Services.AddScoped<IGalleryRepository, GalleryRepository>();
+        builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
+        builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();

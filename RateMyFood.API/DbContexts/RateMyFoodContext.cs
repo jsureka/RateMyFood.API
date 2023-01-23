@@ -78,7 +78,7 @@ Email = "emma@provider.com",
             //        Description = "The world's largest museum"
             //    }
             //    );
-            //base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
 
     }
