@@ -29,17 +29,40 @@ namespace RateMyFood.API.Controllers
         }
         #endregion
 
+
+
         #region register
+        /// <summary>
+        /// Register a User
+        /// </summary>
+        /// <param name="user">The object user to post</param>
+        /// <returns>An IActionResult</returns>
+        /// <response code="200">Returns a string</response>
         [HttpPost("register")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register(User user)
         {
             var res =await  _authenticationService.RegisterUserAsync(user);
             Log.Information("User created with id : " + user.Id); 
-            return Ok("User Created");
+            return CreatedAtRoute("GetSingleUser", new
+            {
+                V = user.Id.ToString()
+            }, user);
         }
         #endregion
 
         #region authenticate
+        /// <summary>
+        /// Authenticate a User (Sign In)
+        /// </summary>
+        /// <param name="authenticationRequest">The object that 
+        /// contains login credentials</param>
+        /// <returns>An IActionResult</returns>
+        /// <response code="200">Returns a user object</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate(
             AuthenticationRequest authenticationRequest)
@@ -71,7 +94,7 @@ namespace RateMyFood.API.Controllers
         #endregion
 
         #region get single user
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetSingleUser")]
         public async Task<IActionResult> GetUser(string id)
         {
             var user = await _authenticationService.GetUserAsync(id);

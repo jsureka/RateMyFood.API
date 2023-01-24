@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RateMyFood.API</name>
+    </assembly>
+    <members>
+        <member name="M:RateMyFood.API.Controllers.AuthenticationController.Register(RateMyFood.API.Entities.User)">
+            <summary>
+            Register a User
+            </summary>
+            <param name="user">The object user to post</param>
+            <returns>An IActionResult</returns>
+            <response code="200">Returns a string</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.AuthenticationController.Authenticate(RateMyFood.API.Dtos.AuthenticationRequest)">
+            <summary>
+            Authenticate a User (Sign In)
+            </summary>
+            <param name="authenticationRequest">The object that 
+            contains login credentials</param>
+            <returns>An IActionResult</returns>
+            <response code="200">Returns a user object</response>
+        </member>
+        <member name="T:RateMyFood.API.Migrations.EmptyUserDb">
+            <inheritdoc />
+        </member>
+        <member name="M:RateMyFood.API.Migrations.EmptyUserDb.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RateMyFood.API.Migrations.EmptyUserDb.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RateMyFood.API.Migrations.EmptyUserDb.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:RateMyFood.API.Migrations.SeedUserData">
+            <inheritdoc />
+        </member>
+        <member name="M:RateMyFood.API.Migrations.SeedUserData.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RateMyFood.API.Migrations.SeedUserData.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RateMyFood.API.Migrations.SeedUserData.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

@@ -2,8 +2,11 @@ using RateMyFood.API;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
     .WriteTo.Console()
-            .CreateBootstrapLogger();
+    .WriteTo.File("logs/ratemyfoodapi.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
 
 Log.Information("Starting up");
 

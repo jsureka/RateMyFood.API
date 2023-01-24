@@ -8,6 +8,7 @@ using RateMyFood.API.Repositories;
 using RateMyFood.API.Services;
 using Serilog;
 using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
 using System.Text;
 
 namespace RateMyFood.API;
@@ -23,6 +24,10 @@ internal static class HostingExtensions
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(setupAction =>
         {
+            var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
+
+            setupAction.IncludeXmlComments(xmlCommentsFullPath);
             setupAction.AddSecurityDefinition("RateMyFoodApiBearerAuth", new OpenApiSecurityScheme()
             {
                 Type = SecuritySchemeType.Http,
