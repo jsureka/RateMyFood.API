@@ -8,7 +8,8 @@ namespace RateMyFood.API.DbContexts
     {
 
         public DbSet<User> Users { get; set; } = null!;
-        //public DbSet<Restaurants> PointsOfInterest { get; set; } = null!;
+        public DbSet<Restaurant> Restaurants { get; set; } = null!;
+        public DbSet<MenuItem> MenuItems { get; set; } = null;
 
         public RateMyFoodContext(DbContextOptions<RateMyFoodContext> options)
             : base(options)
@@ -50,32 +51,6 @@ namespace RateMyFood.API.DbContexts
                     Role = "General"
                 }
                 );
-            //modelBuilder.Entity<PointOfInterest>().HasData(
-            //    new PointOfInterest("Central Park")
-            //    {
-            //        Id = 1,
-            //        CityId = 1,
-            //        Description = "The most visited urban park in United States"
-            //    },
-            //    new PointOfInterest("Cathedral")
-            //    {
-            //        Id = 2,
-            //        CityId = 2,
-            //        Description = "A 102-story skyscraper located in Midtown Manhattan"
-            //    },
-            //    new PointOfInterest("Empire State Building")
-            //    {
-            //        Id = 3,
-            //        CityId = 2,
-            //        Description = "The tallest bulding of the new york"
-            //    },
-            //    new PointOfInterest("The Louvre")
-            //    {
-            //        Id = 4,
-            //        CityId = 1,
-            //        Description = "The world's largest museum"
-            //    }
-            //    );
             base.OnModelCreating(modelBuilder);
         }
 
