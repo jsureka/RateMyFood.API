@@ -45,5 +45,17 @@
         <member name="M:RateMyFood.API.Migrations.SeedUserData.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:RateMyFood.API.Migrations.DbWithRestaurantAndMenuItems">
+            <inheritdoc />
+        </member>
+        <member name="M:RateMyFood.API.Migrations.DbWithRestaurantAndMenuItems.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RateMyFood.API.Migrations.DbWithRestaurantAndMenuItems.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RateMyFood.API.Migrations.DbWithRestaurantAndMenuItems.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>
