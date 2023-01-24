@@ -8,13 +8,18 @@ namespace RateMyFood.API.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
+        
         [Required]
         public string Name { get; set; }
+
         public string Description { get; set; }
 
+        public List<string> Ingredients { get; set; }
+        
         [ForeignKey("RestaurantId")]
         [Required]
         public string RestaurantId { get; set; }
+        
         public MenuItem(string name)
         {
             Name = name;

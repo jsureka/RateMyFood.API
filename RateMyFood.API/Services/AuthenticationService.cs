@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using RateMyFood.API.Dtos;
@@ -16,16 +17,19 @@ namespace RateMyFood.API.Services
         private readonly IConfiguration _configuration;
         private readonly IAuthenticationRepository _authenticationRepository;
         private readonly IPasswordHasher<User> _passwordHasher;
+        private readonly IMapper _mapper;
         #endregion
 
         #region constructor
         public AuthenticationService(IConfiguration configuration, 
             IAuthenticationRepository authenticationRepository,
-            IPasswordHasher<User> passwordHasher)
+            IPasswordHasher<User> passwordHasher,
+            IMapper mapper)
         {
-            this._configuration = configuration;
-            this._authenticationRepository = authenticationRepository;
-            this._passwordHasher = passwordHasher;
+            _configuration = configuration;
+            _authenticationRepository = authenticationRepository;
+            _passwordHasher = passwordHasher;
+            _mapper = mapper;
         }
         #endregion
 
