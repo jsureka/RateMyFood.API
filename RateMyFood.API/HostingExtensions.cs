@@ -53,9 +53,13 @@ internal static class HostingExtensions
         });
         builder.Services.AddScoped<IPasswordHasher<Entities.User>,PasswordHasher<Entities.User>>();
         //// register the repository
-        //builder.Services.AddScoped<IGalleryRepository, GalleryRepository>();
+
         builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
         builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+        builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
+        builder.Services.AddScoped<IRestaurantService, RestaurantService>();
+
+
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
