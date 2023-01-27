@@ -14,6 +14,7 @@ namespace RateMyFood.API.Repositories
         {
             _rateMyFoodContext = rateMyFoodContext;
         }
+
         public async Task AddAsync(Restaurant restaurant)
         {
             _rateMyFoodContext.Restaurants.Add(restaurant);
