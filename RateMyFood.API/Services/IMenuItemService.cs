@@ -6,7 +6,8 @@ namespace RateMyFood.API.Services
     {
         public Task AddMenuItemAsync(MenuItem menuItem);
         public Task<List<MenuItem>> GetMenuItemAsync();
-        public Task<MenuItem> GetMenuItemByIdAsync(string menuItemId);
+        public Task<MenuItem> GetMenuItemAsync(string id);
+        public Task<List<MenuItem>> GetMenuItemByRestaurantIdAsync(string restaurantId);
         public Task UpdateMenuItemAsync(
             string menuItemId, MenuItem menuItem);
         public Task DeleteMenuItemAsync(string menuItemId);
