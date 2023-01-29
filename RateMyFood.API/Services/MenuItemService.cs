@@ -10,8 +10,17 @@ namespace RateMyFood.API.Services
         private readonly IRestaurantRepository _restaurantRepository;
         #endregion
 
-        public async Task AddMenuItemAsync(MenuItem menuItem)
+        public async Task AddMenuItemAsync(MenuItem menuItem, string userId)
         {
+            var restaurant = await _restaurantRepository.GetById(menuItem.RestaurantId);
+            if(restaurant == null)
+            {
+                throw new NullReferenceException();
+            }
+            if(restaurant.OwnerId != userId)
+            {
+                throw new UnauthorizedAccessException();
+            }
             await _menuItemRepository.AddAsync(menuItem);
             await _menuItemRepository.SaveChangesAsync(); 
 

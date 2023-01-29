@@ -58,6 +58,8 @@ internal static class HostingExtensions
         builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
         builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
         builder.Services.AddScoped<IRestaurantService, RestaurantService>();
+        builder.Services.AddScoped<IMenuItemRepository, MenuItemRepository>();
+        builder.Services.AddScoped<IMenuItemService, MenuItemService>();
 
 
         builder.Services.AddHttpContextAccessor();
