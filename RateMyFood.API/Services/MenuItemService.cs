@@ -5,21 +5,26 @@ namespace RateMyFood.API.Services
 {
     public class MenuItemService : IMenuItemService
     {
+        #region fields
         private readonly IMenuItemRepository _menuItemRepository;
-
-        public MenuItemService( IMenuItemRepository menuItemRepository)
-        {
-            _menuItemRepository = menuItemRepository;
-        }
+        private readonly IRestaurantRepository _restaurantRepository;
+        #endregion
 
         public async Task AddMenuItemAsync(MenuItem menuItem)
         {
             await _menuItemRepository.AddAsync(menuItem);
+            await _menuItemRepository.SaveChangesAsync(); 
+
         }
 
-        public Task DeleteMenuItemAsync(string menuItemId)
+        public async Task DeleteMenuItemAsync(string menuItemId)
         {
-            throw new NotImplementedException();
+            var menuItem = await  _menuItemRepository.GetById(menuItemId);
+            if(menuItem == null)
+            {
+                throw new NullReferenceException("Menu Item Not Found");
+            }
+            await _menuItemRepository.DeleteAsync(menuItemId);
         }
 
         public async Task<List<MenuItem>> GetMenuItemAsync()
@@ -32,17 +37,24 @@ namespace RateMyFood.API.Services
             return await _menuItemRepository.GetById(id);
         }
 
-
         public async Task<List<MenuItem>> GetMenuItemByRestaurantIdAsync(string restaurantId)
         {
+            var restaurant = this._restaurantRepository.GetById(restaurantId);
+            if( restaurant == null)
+            {
+                throw new NullReferenceException();
+            }
             return await _menuItemRepository.GetByRestaurant( restaurantId);
         }
 
-
-
-        public Task UpdateMenuItemAsync(string menuItemId, MenuItem menuItem)
+        public async Task UpdateMenuItemAsync(string menuItemId, MenuItem menuItem)
         {
-            throw new NotImplementedException();
+            var item = await _menuItemRepository.GetById(menuItemId);
+            if(item is null )
+            {
+                throw new NullReferenceException("Menu Item Not Found");
+            }
+            await _menuItemRepository.Update(menuItemId, menuItem);
         }
     }
 }

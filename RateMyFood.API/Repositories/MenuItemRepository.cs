@@ -20,9 +20,11 @@ namespace RateMyFood.API.Repositories
             await SaveChangesAsync();
         }
 
-        public Task DeleteAsync(string id)
+        public async Task DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            var menuItem = await GetById(id);
+            _rateMyFoodContext.MenuItems.Remove(menuItem);
+            SaveChangesAsync();
         }
 
         public Task<List<MenuItem>> Get()
@@ -45,11 +47,6 @@ namespace RateMyFood.API.Repositories
             return menuItemsByRestaurant;
         }
 
-        public async Task<bool> SaveChangesAsync()
-        {
-            return (await _rateMyFoodContext.SaveChangesAsync() >= 0) ;
-        }
-
         public async Task Update(string id, MenuItem menuItemToUpdate)
         {
             var res = await GetById(id);
@@ -62,5 +59,11 @@ namespace RateMyFood.API.Repositories
             res.Ingredients = menuItemToUpdate.Ingredients;
             await _rateMyFoodContext.SaveChangesAsync();
         }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _rateMyFoodContext.SaveChangesAsync() >= 0) ;
+        }
+
     }
 }
