@@ -8,6 +8,7 @@ namespace RateMyFood.API.Services
 
         public Task AddRestaurantAsync(Restaurant restaurant);
         public Task<List<Restaurant>> GetRestaurantAsync();
+        public Task<List<Restaurant>> SearchRestaurantAsync(string searchstring);
         public Task<Restaurant> GetRestaurantByIdAsync(string restaurantId);
         public Task UpdateRestaurantAsync(
             string restaurantId, RestaurantDto restaurantToUpdate);

@@ -39,6 +39,12 @@ namespace RateMyFood.API.Services
             return await _restaurantRepository.GetById(restaurantId);
         }
 
+        public async Task<List<Restaurant>> SearchRestaurantAsync(string searchstring)
+        {
+            var restaurants = await _restaurantRepository.Get();
+            return restaurants.Where( c => c.Name.Contains(searchstring) ).ToList();
+        }
+
         public async Task UpdateRestaurantAsync(string restaurantId, RestaurantDto restaurantToUpdate)
         {
             await _restaurantRepository.Update(restaurantId, restaurantToUpdate);

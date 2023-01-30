@@ -46,6 +46,16 @@ namespace RateMyFood.API.Controllers
         }
         #endregion
 
+        #region get 
+        [HttpGet("/search")]
+        public async Task<IActionResult> SearchMenuItem([FromQuery] string searchstring)
+        {
+            var menuItems = await _menuItemService.SearchMenuItemAsync(searchstring);
+
+            return Ok(menuItems);
+        }
+        #endregion
+
         #region get by restaurant
         [HttpGet("/restaurant/{restaurantId}")]
         public async Task<IActionResult> GetMenuItemByRestaurant(string restaurantId)

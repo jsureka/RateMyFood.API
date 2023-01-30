@@ -56,6 +56,12 @@ namespace RateMyFood.API.Services
             return await _menuItemRepository.GetByRestaurant( restaurantId);
         }
 
+        public async Task<List<MenuItem>> SearchMenuItemAsync(string searchdata)
+        {
+            var menuItems = await _menuItemRepository.Get();
+            return menuItems.Where(c => c.Name.Contains(searchdata)).ToList();
+        }
+
         public async Task UpdateMenuItemAsync(string menuItemId, MenuItem menuItem)
         {
             var item = await _menuItemRepository.GetById(menuItemId);
