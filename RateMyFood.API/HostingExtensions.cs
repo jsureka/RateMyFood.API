@@ -60,7 +60,8 @@ internal static class HostingExtensions
         builder.Services.AddScoped<IRestaurantService, RestaurantService>();
         builder.Services.AddScoped<IMenuItemRepository, MenuItemRepository>();
         builder.Services.AddScoped<IMenuItemService, MenuItemService>();
-
+        builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+        builder.Services.AddScoped<IReviewService, ReviewService>();    
 
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

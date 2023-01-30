@@ -56,7 +56,6 @@ namespace RateMyFood.API.Repositories
             }
             res.Name = menuItemToUpdate.Name;
             res.Description = menuItemToUpdate.Description;
-            res.Ingredients = menuItemToUpdate.Ingredients;
             await _rateMyFoodContext.SaveChangesAsync();
         }
 

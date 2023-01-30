@@ -4,23 +4,28 @@ using RateMyFood.API.Services;
 
 namespace RateMyFood.API.Controllers
 {
-    [Route("api/restaurant")]
+    [Route("api/menuitem")]
     public class MenuItemController : ApiBaseController
     {
+        #region fields
         private readonly MenuItemService _menuItemService;
+        #endregion
 
-        public MenuItemController( MenuItemService menuItemService)
+        #region constructor
+        public MenuItemController(MenuItemService menuItemService)
         {
             _menuItemService = menuItemService;
         }
+        #endregion
 
+        #region add
         [HttpPost]
         public async Task<IActionResult> AddMenuItem(MenuItem menuItem)
         {
             try
             {
                 await _menuItemService.AddMenuItemAsync(menuItem,
-                    User.Claims.Where( c => c.Type == "sub").ToString());
+                    User.Claims.Where(c => c.Type == "sub").ToString());
 
                 return Ok();
             }
@@ -29,15 +34,29 @@ namespace RateMyFood.API.Controllers
                 return Unauthorized();
             }
         }
+        #endregion
 
-        [HttpGet]
-        public async Task<IActionResult> GetMenuItem(string restaurantId)
+        #region get 
+        [HttpGet("{menuItemId}")]
+        public async Task<IActionResult> GetMenuItem(string menuItemId)
+        {
+            var menuItems = await _menuItemService.GetMenuItemAsync(menuItemId);
+
+            return Ok(menuItems);
+        }
+        #endregion
+
+        #region get by restaurant
+        [HttpGet("/restaurant/{restaurantId}")]
+        public async Task<IActionResult> GetMenuItemByRestaurant(string restaurantId)
         {
             var menuItems = await _menuItemService.GetMenuItemByRestaurantIdAsync(restaurantId);
             
             return Ok(menuItems);
         }
+        #endregion
 
+        #region update
         [HttpPut]
         public async Task<IActionResult> UpdateMenuItem(string menuItemId, MenuItem menuItem)
         {
@@ -46,7 +65,9 @@ namespace RateMyFood.API.Controllers
             return Ok();
 
         }
+        #endregion
 
+        #region delete
         [HttpDelete]
         public async Task<IActionResult> DeleteMenuItem(string menuItemId)
         {
@@ -54,7 +75,7 @@ namespace RateMyFood.API.Controllers
 
             return NoContent();
         }
+        #endregion
 
-        
     }
 }

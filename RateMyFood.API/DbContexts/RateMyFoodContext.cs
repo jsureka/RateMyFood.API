@@ -10,6 +10,8 @@ namespace RateMyFood.API.DbContexts
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Restaurant> Restaurants { get; set; } = null!;
         public DbSet<MenuItem> MenuItems { get; set; } = null;
+        public DbSet<Review> Reviews { get; set; } = null;
+
 
         public RateMyFoodContext(DbContextOptions<RateMyFoodContext> options)
             : base(options)
