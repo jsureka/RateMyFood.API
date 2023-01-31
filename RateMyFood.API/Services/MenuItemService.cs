@@ -10,6 +10,13 @@ namespace RateMyFood.API.Services
         private readonly IRestaurantRepository _restaurantRepository;
         #endregion
 
+        public MenuItemService( IMenuItemRepository menuItemRepository, 
+            IRestaurantRepository restaurantRepository )
+        {
+            _menuItemRepository = menuItemRepository;
+            _restaurantRepository = restaurantRepository;
+        }
+
         public async Task AddMenuItemAsync(MenuItem menuItem, string userId)
         {
             var restaurant = await _restaurantRepository.GetById(menuItem.RestaurantId);
@@ -59,7 +66,7 @@ namespace RateMyFood.API.Services
         public async Task<List<MenuItem>> SearchMenuItemAsync(string searchdata)
         {
             var menuItems = await _menuItemRepository.Get();
-            return menuItems.Where(c => c.Name.Contains(searchdata)).ToList();
+            return menuItems.Where(c => c.Name.ToLower().Contains(searchdata)).ToList();
         }
 
         public async Task UpdateMenuItemAsync(string menuItemId, MenuItem menuItem)

@@ -42,7 +42,7 @@ namespace RateMyFood.API.Services
         public async Task<List<Restaurant>> SearchRestaurantAsync(string searchstring)
         {
             var restaurants = await _restaurantRepository.Get();
-            return restaurants.Where( c => c.Name.Contains(searchstring) ).ToList();
+            return restaurants.Where( c => c.Name.ToLower().Contains(searchstring) ).ToList();
         }
 
         public async Task UpdateRestaurantAsync(string restaurantId, RestaurantDto restaurantToUpdate)

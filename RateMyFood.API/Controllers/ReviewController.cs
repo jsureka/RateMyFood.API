@@ -19,6 +19,14 @@ namespace RateMyFood.API.Controllers
         #endregion
 
         #region add review
+        /// <summary>
+        ///  Add a review for a menu Item
+        /// </summary>
+        /// <param name="review">The review object</param>
+        /// <returns>An IActionResult</returns>
+        /// <response code="200">Returns OK</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         public async Task<IActionResult> Review(Review review )
         { 
@@ -29,6 +37,14 @@ namespace RateMyFood.API.Controllers
         #endregion
 
         #region get review
+        /// <summary>
+        /// Get all reviews 
+        /// </summary>
+        /// <returns>An IActionResult</returns>
+        /// <response code="200">Returns list of reviews</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpGet]
         public async Task<IActionResult> GetReview()
         {
@@ -39,6 +55,15 @@ namespace RateMyFood.API.Controllers
         #endregion
 
         #region get review by id
+        /// <summary>
+        /// Get review by Id
+        /// </summary>
+        /// <param name="id">The Id of review</param>
+        /// <returns>An IActionResult</returns>
+        /// <response code="200">Returns Review</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetReview(string id)
         {
@@ -48,7 +73,16 @@ namespace RateMyFood.API.Controllers
         }
         #endregion
 
-        #region get review by id
+        #region get review by menu item
+        /// <summary>
+        /// Get review by menu item id
+        /// </summary>
+        /// <param name="id">The Id of menu item</param>
+        /// <returns>An IActionResult</returns>
+        /// <response code="200">Returns List of reviews</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpGet("menuItem/{id}")]
         public async Task<IActionResult> GetReviewByMenuItem(string id)
         {
@@ -59,6 +93,16 @@ namespace RateMyFood.API.Controllers
         #endregion
 
         #region update review
+        /// <summary>
+        /// Update a review
+        /// </summary>
+        /// <param name="reviewId">The Id of review</param>
+        /// <param name="review">The udpated review object</param>
+        /// <returns>An IActionResult</returns>
+        /// <response code="204">Returns No Content</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPut("{reviewId}")]
         public async Task<IActionResult> UpdateReview(string reviewId, Review review)
         {
@@ -69,6 +113,15 @@ namespace RateMyFood.API.Controllers
         #endregion
 
         #region delete review
+        /// <summary>
+        /// Delete a review
+        /// </summary>
+        /// <param name="id">The Id of review</param>
+        /// <returns>An IActionResult</returns>
+        /// <response code="204">Returns No Content</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteReview(string id)
         {

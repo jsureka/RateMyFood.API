@@ -54,6 +54,151 @@
             <returns>An IActionResult</returns>
             <response code="204">Returns no content</response>
         </member>
+        <member name="M:RateMyFood.API.Controllers.MenuItemController.AddMenuItem(RateMyFood.API.Entities.MenuItem)">
+            <summary>
+            Add a menu Item to a restaurant (Restaurant Owner)
+            </summary>
+            <param name="menuItem">The object menuItem</param>
+            <returns>An IActionResult</returns>
+            <response code="200">No Content</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.MenuItemController.GetMenuItem(System.String)">
+            <summary>
+            Get info of a menu item 
+            </summary>
+            <param name="menuItemId">The Id of menu Item</param>
+            <returns>An IActionResult containing the users</returns>
+            <response code="200">Returns menu item object</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.MenuItemController.SearchMenuItem(System.String)">
+            <summary>
+            Search a menu item by name
+            </summary>
+            <param name="menuItemName">The search query</param>
+            <returns>An IActionResult containing the menuItems List</returns>
+            <response code="200">Returns menu item list matching query</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.MenuItemController.GetMenuItemByRestaurant(System.String)">
+            <summary>
+            Get info of menu items of a restaurant
+            </summary>
+            <param name="restaurantId">The Id of restaurant</param>
+            <returns>An IActionResult containing the users</returns>
+            <response code="200">Returns menu items list of restaurant</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.MenuItemController.UpdateMenuItem(System.String,RateMyFood.API.Entities.MenuItem)">
+            <summary>
+            Update a menu item (restaurant owner)
+            </summary>
+            <param name="menuItemId">The Id of menu Item</param>
+            <param name="menuItem">The update object of menu Item</param>
+            <returns>An IActionResult</returns>
+            <response code="204">Returns No Content</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.MenuItemController.DeleteMenuItem(System.String)">
+            <summary>
+            Delete a menu item (Restaurant Owner) 
+            </summary>
+            <param name="menuItemId">The Id of menu Item</param>
+            <returns>An IActionResult</returns>
+            <response code="204">Returns No Content</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.RestaurantController.AddRestaurant(RateMyFood.API.Entities.Restaurant)">
+            <summary>
+            Add a restaurant (Admin)
+            </summary>
+            <param name="restaurant">The Restaurant Object</param>
+            <returns>An IActionResult containing a string</returns>
+            <response code="200">Returns string</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.RestaurantController.GetRestaurants">
+            <summary>
+            Get info of all restaurants
+            </summary>
+            <returns>An IActionResult with restaurant list</returns>
+            <response code="200">Returns list of restaurant</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.RestaurantController.SearchRestaurant(System.String)">
+            <summary>
+            Search for a restaurant with name
+            </summary>
+            <param name="restaurantName">The search string</param>
+            <returns>An IActionResult containing matched restaurants</returns>
+            <response code="200">Returns list of restaurant</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.RestaurantController.GetSingleRestaurant(System.String)">
+            <summary>
+            Get info of a single restaurant
+            </summary>
+            <param name="id">The Id of restaurant</param>
+            <returns>An IActionResult contanining the restaurant</returns>
+            <response code="200">Returns restaurant object</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.RestaurantController.UpdateRestaurant(System.String,RateMyFood.API.Models.RestaurantDto)">
+            <summary>
+            Update restaurant (Admin)
+            </summary>
+            <param name="id">The Id of restaurant</param>
+            <param name="restaurantDto">The object of updated restaurant</param>
+            <returns>An IActionResult</returns>
+            <response code="204">Returns No Content</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.RestaurantController.DeleteRestaurant(System.String)">
+            <summary>
+            Delete restaurant (Admin)
+            </summary>
+            <param name="id">The Id of restaurant</param>
+            <returns>An IActionResult</returns>
+            <response code="204">Returns No Content</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.ReviewController.Review(RateMyFood.API.Entities.Review)">
+            <summary>
+             Add a review for a menu Item
+            </summary>
+            <param name="review">The review object</param>
+            <returns>An IActionResult</returns>
+            <response code="200">Returns OK</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.ReviewController.GetReview">
+            <summary>
+            Get all reviews 
+            </summary>
+            <returns>An IActionResult</returns>
+            <response code="200">Returns list of reviews</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.ReviewController.GetReview(System.String)">
+            <summary>
+            Get review by Id
+            </summary>
+            <param name="id">The Id of review</param>
+            <returns>An IActionResult</returns>
+            <response code="200">Returns Review</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.ReviewController.GetReviewByMenuItem(System.String)">
+            <summary>
+            Get review by menu item id
+            </summary>
+            <param name="id">The Id of menu item</param>
+            <returns>An IActionResult</returns>
+            <response code="200">Returns List of reviews</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.ReviewController.UpdateReview(System.String,RateMyFood.API.Entities.Review)">
+            <summary>
+            Update a review
+            </summary>
+            <param name="reviewId">The Id of review</param>
+            <param name="review">The udpated review object</param>
+            <returns>An IActionResult</returns>
+            <response code="204">Returns No Content</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.ReviewController.DeleteReview(System.String)">
+            <summary>
+            Delete a review
+            </summary>
+            <param name="id">The Id of review</param>
+            <returns>An IActionResult</returns>
+            <response code="204">Returns No Content</response>
+        </member>
         <member name="T:RateMyFood.API.Migrations.EmptyUserDb">
             <inheritdoc />
         </member>

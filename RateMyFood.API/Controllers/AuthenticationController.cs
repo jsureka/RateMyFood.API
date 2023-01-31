@@ -89,7 +89,7 @@ namespace RateMyFood.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = "MustBeAdmin")]
         [HttpGet]
         public async Task<IActionResult> GetUser()
         {
