@@ -81,7 +81,15 @@ namespace RateMyFood.API.Controllers
         #endregion
 
         #region get all users
-        //[Authorize]
+        /// <summary>
+        /// Get all users (Admin)
+        /// </summary>
+        /// <returns>An IActionResult containing the users</returns>
+        /// <response code="200">Returns list of users</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetUser()
         {
@@ -94,6 +102,16 @@ namespace RateMyFood.API.Controllers
         #endregion
 
         #region get single user
+        /// <summary>
+        /// Get a User
+        /// </summary>
+        /// <param name="id">The string that 
+        /// contains id</param>
+        /// <returns>An IActionResult with user oject</returns>
+        /// <response code="200">Returns a user object</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("{id}", Name = "GetSingleUser")]
         public async Task<IActionResult> GetUser(string id)
         {
@@ -106,22 +124,41 @@ namespace RateMyFood.API.Controllers
         #endregion
 
         #region update
-        [HttpPut("udpate")]
+        /// <summary>
+        /// Update an user
+        /// </summary>
+        /// <param name="userToUpdate">Updated user object</param>
+        /// <param name="id">Id of user to update</param>
+        /// <returns>No Content</returns>
+        /// <response code="204">Returns No Content</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPut("update")]
         public async Task<IActionResult> Update(UserToUpdate userToUpdate, string id)
         {
             var res = await _authenticationService.UpdateUserAsync(userToUpdate, id);
             Log.Information("Updating User with id : " + id);
-            return Ok();
+            return NoContent();
         }
         #endregion
 
         #region delete
+        /// <summary>
+        /// Delete a User
+        /// </summary>
+        /// <param name="id">User id</param>
+        /// <returns>An IActionResult</returns>
+        /// <response code="204">Returns no content</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpDelete]
         public async Task<IActionResult> Delete(string id)
         {
              _authenticationService.DeleteUser(id);
             Log.Information("Deleted User with Id : " + id);
-            return Ok();
+            return NoContent();
         }
         #endregion
     }

@@ -38,7 +38,7 @@ namespace RateMyFood.API.Controllers
 
         #region get 
         [HttpGet("{menuItemId}")]
-        public async Task<IActionResult> GetMenuItem(string menuItemId)
+        public async Task<IActionResult> GetMenuItem([FromRoute] string menuItemId)
         {
             var menuItems = await _menuItemService.GetMenuItemAsync(menuItemId);
 
@@ -46,11 +46,11 @@ namespace RateMyFood.API.Controllers
         }
         #endregion
 
-        #region get 
-        [HttpGet("/search")]
-        public async Task<IActionResult> SearchMenuItem([FromQuery] string searchstring)
+        #region search menu item 
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchMenuItem([FromQuery] string menuItemName)
         {
-            var menuItems = await _menuItemService.SearchMenuItemAsync(searchstring);
+            var menuItems = await _menuItemService.SearchMenuItemAsync(menuItemName);
 
             return Ok(menuItems);
         }

@@ -53,6 +53,8 @@ namespace RateMyFood.API.DbContexts
                     Role = "General"
                 }
                 );
+            modelBuilder.Entity<MenuItem>().HasIndex(c => c.Name).HasDatabaseName("IDX_NAME");
+            modelBuilder.Entity<Restaurant>().HasIndex(c => c.Name).HasDatabaseName("IDX_NAME");
             base.OnModelCreating(modelBuilder);
         }
 

@@ -21,6 +21,39 @@
             <returns>An IActionResult</returns>
             <response code="200">Returns a user object</response>
         </member>
+        <member name="M:RateMyFood.API.Controllers.AuthenticationController.GetUser">
+            <summary>
+            Get all users (Admin)
+            </summary>
+            <returns>An IActionResult containing the users</returns>
+            <response code="200">Returns list of users</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.AuthenticationController.GetUser(System.String)">
+            <summary>
+            Get a User
+            </summary>
+            <param name="id">The string that 
+            contains id</param>
+            <returns>An IActionResult with user oject</returns>
+            <response code="200">Returns a user object</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.AuthenticationController.Update(RateMyFood.API.Dtos.UserToUpdate,System.String)">
+            <summary>
+            Update an user
+            </summary>
+            <param name="userToUpdate">Updated user object</param>
+            <param name="id">Id of user to update</param>
+            <returns>No Content</returns>
+            <response code="204">Returns No Content</response>
+        </member>
+        <member name="M:RateMyFood.API.Controllers.AuthenticationController.Delete(System.String)">
+            <summary>
+            Delete a User
+            </summary>
+            <param name="id">User id</param>
+            <returns>An IActionResult</returns>
+            <response code="204">Returns no content</response>
+        </member>
         <member name="T:RateMyFood.API.Migrations.EmptyUserDb">
             <inheritdoc />
         </member>
@@ -67,6 +100,18 @@
             <inheritdoc />
         </member>
         <member name="M:RateMyFood.API.Migrations.ReviewAndMenuItemMigration20.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:RateMyFood.API.Migrations.AddedIndexToDb">
+            <inheritdoc />
+        </member>
+        <member name="M:RateMyFood.API.Migrations.AddedIndexToDb.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RateMyFood.API.Migrations.AddedIndexToDb.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RateMyFood.API.Migrations.AddedIndexToDb.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
     </members>
