@@ -9,7 +9,6 @@ using Serilog;
 
 namespace RateMyFood.API.Controllers
 {
-    [Route("api/authentication")]
     public class AuthenticationController : ApiBaseController
     {
         #region fields
@@ -37,14 +36,13 @@ namespace RateMyFood.API.Controllers
         /// </summary>
         /// <param name="user">The object user to post</param>
         /// <returns>An IActionResult</returns>
-        /// <response code="200">Returns a string</response>
         [HttpPost("register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register(User user)
         {
             var res =await  _authenticationService.RegisterUserAsync(user);
             Log.Information("User created with id : " + user.Id); 
+
             return CreatedAtRoute("GetSingleUser", new
             {
                 V = user.Id.ToString()
@@ -59,10 +57,7 @@ namespace RateMyFood.API.Controllers
         /// <param name="authenticationRequest">The object that 
         /// contains login credentials</param>
         /// <returns>An IActionResult</returns>
-        /// <response code="200">Returns a user object</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate(
             AuthenticationRequest authenticationRequest)
@@ -85,10 +80,7 @@ namespace RateMyFood.API.Controllers
         /// Get all users (Admin)
         /// </summary>
         /// <returns>An IActionResult containing the users</returns>
-        /// <response code="200">Returns list of users</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Authorize(Policy = "MustBeAdmin")]
         [HttpGet]
         public async Task<IActionResult> GetUser()
@@ -108,10 +100,7 @@ namespace RateMyFood.API.Controllers
         /// <param name="id">The string that 
         /// contains id</param>
         /// <returns>An IActionResult with user oject</returns>
-        /// <response code="200">Returns a user object</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("{id}", Name = "GetSingleUser")]
         public async Task<IActionResult> GetUser(string id)
         {
@@ -130,15 +119,13 @@ namespace RateMyFood.API.Controllers
         /// <param name="userToUpdate">Updated user object</param>
         /// <param name="id">Id of user to update</param>
         /// <returns>No Content</returns>
-        /// <response code="204">Returns No Content</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut("update")]
         public async Task<IActionResult> Update(UserToUpdate userToUpdate, string id)
         {
             var res = await _authenticationService.UpdateUserAsync(userToUpdate, id);
             Log.Information("Updating User with id : " + id);
+
             return NoContent();
         }
         #endregion
@@ -149,15 +136,13 @@ namespace RateMyFood.API.Controllers
         /// </summary>
         /// <param name="id">User id</param>
         /// <returns>An IActionResult</returns>
-        /// <response code="204">Returns no content</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpDelete]
         public async Task<IActionResult> Delete(string id)
         {
              _authenticationService.DeleteUser(id);
             Log.Information("Deleted User with Id : " + id);
+
             return NoContent();
         }
         #endregion

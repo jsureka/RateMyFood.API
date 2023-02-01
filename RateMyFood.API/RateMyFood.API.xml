@@ -10,7 +10,6 @@
             </summary>
             <param name="user">The object user to post</param>
             <returns>An IActionResult</returns>
-            <response code="200">Returns a string</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.AuthenticationController.Authenticate(RateMyFood.API.Dtos.AuthenticationRequest)">
             <summary>
@@ -19,14 +18,12 @@
             <param name="authenticationRequest">The object that 
             contains login credentials</param>
             <returns>An IActionResult</returns>
-            <response code="200">Returns a user object</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.AuthenticationController.GetUser">
             <summary>
             Get all users (Admin)
             </summary>
             <returns>An IActionResult containing the users</returns>
-            <response code="200">Returns list of users</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.AuthenticationController.GetUser(System.String)">
             <summary>
@@ -35,7 +32,6 @@
             <param name="id">The string that 
             contains id</param>
             <returns>An IActionResult with user oject</returns>
-            <response code="200">Returns a user object</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.AuthenticationController.Update(RateMyFood.API.Dtos.UserToUpdate,System.String)">
             <summary>
@@ -44,7 +40,6 @@
             <param name="userToUpdate">Updated user object</param>
             <param name="id">Id of user to update</param>
             <returns>No Content</returns>
-            <response code="204">Returns No Content</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.AuthenticationController.Delete(System.String)">
             <summary>
@@ -52,7 +47,6 @@
             </summary>
             <param name="id">User id</param>
             <returns>An IActionResult</returns>
-            <response code="204">Returns no content</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.MenuItemController.AddMenuItem(RateMyFood.API.Entities.MenuItem)">
             <summary>
@@ -76,7 +70,6 @@
             </summary>
             <param name="menuItemName">The search query</param>
             <returns>An IActionResult containing the menuItems List</returns>
-            <response code="200">Returns menu item list matching query</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.MenuItemController.GetMenuItemByRestaurant(System.String)">
             <summary>
@@ -84,7 +77,6 @@
             </summary>
             <param name="restaurantId">The Id of restaurant</param>
             <returns>An IActionResult containing the users</returns>
-            <response code="200">Returns menu items list of restaurant</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.MenuItemController.UpdateMenuItem(System.String,RateMyFood.API.Entities.MenuItem)">
             <summary>
@@ -93,7 +85,6 @@
             <param name="menuItemId">The Id of menu Item</param>
             <param name="menuItem">The update object of menu Item</param>
             <returns>An IActionResult</returns>
-            <response code="204">Returns No Content</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.MenuItemController.DeleteMenuItem(System.String)">
             <summary>
@@ -101,22 +92,19 @@
             </summary>
             <param name="menuItemId">The Id of menu Item</param>
             <returns>An IActionResult</returns>
-            <response code="204">Returns No Content</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.RestaurantController.AddRestaurant(RateMyFood.API.Entities.Restaurant)">
             <summary>
-            Add a restaurant (Admin)
+            Add a new restaurant
             </summary>
-            <param name="restaurant">The Restaurant Object</param>
-            <returns>An IActionResult containing a string</returns>
-            <response code="200">Returns string</response>
+            <param name="restaurant"></param>
+            <returns></returns>
         </member>
         <member name="M:RateMyFood.API.Controllers.RestaurantController.GetRestaurants">
             <summary>
             Get info of all restaurants
             </summary>
             <returns>An IActionResult with restaurant list</returns>
-            <response code="200">Returns list of restaurant</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.RestaurantController.SearchRestaurant(System.String)">
             <summary>
@@ -124,7 +112,6 @@
             </summary>
             <param name="restaurantName">The search string</param>
             <returns>An IActionResult containing matched restaurants</returns>
-            <response code="200">Returns list of restaurant</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.RestaurantController.GetSingleRestaurant(System.String)">
             <summary>
@@ -132,7 +119,6 @@
             </summary>
             <param name="id">The Id of restaurant</param>
             <returns>An IActionResult contanining the restaurant</returns>
-            <response code="200">Returns restaurant object</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.RestaurantController.UpdateRestaurant(System.String,RateMyFood.API.Models.RestaurantDto)">
             <summary>
@@ -141,7 +127,6 @@
             <param name="id">The Id of restaurant</param>
             <param name="restaurantDto">The object of updated restaurant</param>
             <returns>An IActionResult</returns>
-            <response code="204">Returns No Content</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.RestaurantController.DeleteRestaurant(System.String)">
             <summary>
@@ -149,7 +134,6 @@
             </summary>
             <param name="id">The Id of restaurant</param>
             <returns>An IActionResult</returns>
-            <response code="204">Returns No Content</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.ReviewController.Review(RateMyFood.API.Entities.Review)">
             <summary>
@@ -157,14 +141,12 @@
             </summary>
             <param name="review">The review object</param>
             <returns>An IActionResult</returns>
-            <response code="200">Returns OK</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.ReviewController.GetReview">
             <summary>
             Get all reviews 
             </summary>
             <returns>An IActionResult</returns>
-            <response code="200">Returns list of reviews</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.ReviewController.GetReview(System.String)">
             <summary>
@@ -172,7 +154,6 @@
             </summary>
             <param name="id">The Id of review</param>
             <returns>An IActionResult</returns>
-            <response code="200">Returns Review</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.ReviewController.GetReviewByMenuItem(System.String)">
             <summary>
@@ -180,7 +161,6 @@
             </summary>
             <param name="id">The Id of menu item</param>
             <returns>An IActionResult</returns>
-            <response code="200">Returns List of reviews</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.ReviewController.UpdateReview(System.String,RateMyFood.API.Entities.Review)">
             <summary>
@@ -189,7 +169,6 @@
             <param name="reviewId">The Id of review</param>
             <param name="review">The udpated review object</param>
             <returns>An IActionResult</returns>
-            <response code="204">Returns No Content</response>
         </member>
         <member name="M:RateMyFood.API.Controllers.ReviewController.DeleteReview(System.String)">
             <summary>
@@ -197,7 +176,6 @@
             </summary>
             <param name="id">The Id of review</param>
             <returns>An IActionResult</returns>
-            <response code="204">Returns No Content</response>
         </member>
         <member name="T:RateMyFood.API.Migrations.EmptyUserDb">
             <inheritdoc />

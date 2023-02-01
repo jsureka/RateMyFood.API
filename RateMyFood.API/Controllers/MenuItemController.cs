@@ -6,7 +6,6 @@ using System.Security.Claims;
 
 namespace RateMyFood.API.Controllers
 {
-    [Route("api/menuitem")]
     public class MenuItemController : ApiBaseController
     {
         #region fields
@@ -28,8 +27,6 @@ namespace RateMyFood.API.Controllers
         /// <returns>An IActionResult</returns>
         /// <response code="200">No Content</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         public async Task<IActionResult> AddMenuItem(MenuItem menuItem)
         {
@@ -38,7 +35,7 @@ namespace RateMyFood.API.Controllers
             await _menuItemService.AddMenuItemAsync(menuItem,
                     id.ToString());
 
-                return Ok();
+                return CreatedAtRoute("GetMenuItem", menuItem.Id.ToString(), menuItem);
         }
         #endregion
 
@@ -50,8 +47,7 @@ namespace RateMyFood.API.Controllers
         /// <returns>An IActionResult containing the users</returns>
         /// <response code="200">Returns menu item object</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpGet("{menuItemId}")]
+        [HttpGet("{menuItemId}" , Name = "GetMenuItem")]
         public async Task<IActionResult> GetMenuItem([FromRoute] string menuItemId)
         {
             var menuItems = await _menuItemService.GetMenuItemAsync(menuItemId);
@@ -66,9 +62,8 @@ namespace RateMyFood.API.Controllers
         /// </summary>
         /// <param name="menuItemName">The search query</param>
         /// <returns>An IActionResult containing the menuItems List</returns>
-        /// <response code="200">Returns menu item list matching query</response>
+     
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("search")]
         public async Task<IActionResult> SearchMenuItem([FromQuery] string menuItemName)
         {
@@ -84,10 +79,8 @@ namespace RateMyFood.API.Controllers
         /// </summary>
         /// <param name="restaurantId">The Id of restaurant</param>
         /// <returns>An IActionResult containing the users</returns>
-        /// <response code="200">Returns menu items list of restaurant</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpGet("/restaurant/{restaurantId}")]
+        [HttpGet("restaurant/{restaurantId}")]
         public async Task<IActionResult> GetMenuItemByRestaurant(string restaurantId)
         {
             var menuItems = await _menuItemService.GetMenuItemByRestaurantIdAsync(restaurantId);
@@ -103,10 +96,7 @@ namespace RateMyFood.API.Controllers
         /// <param name="menuItemId">The Id of menu Item</param>
         /// <param name="menuItem">The update object of menu Item</param>
         /// <returns>An IActionResult</returns>
-        /// <response code="204">Returns No Content</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPut]
         public async Task<IActionResult> UpdateMenuItem(string menuItemId, MenuItem menuItem)
         {
@@ -123,10 +113,7 @@ namespace RateMyFood.API.Controllers
         /// </summary>
         /// <param name="menuItemId">The Id of menu Item</param>
         /// <returns>An IActionResult</returns>
-        /// <response code="204">Returns No Content</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpDelete]
         public async Task<IActionResult> DeleteMenuItem(string menuItemId)
         {

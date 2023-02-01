@@ -6,7 +6,6 @@ using RateMyFood.API.Services;
 
 namespace RateMyFood.API.Controllers
 {
-    [Route("api/restaurant")]
     public class RestaurantController : ApiBaseController
     {
         #region fields
@@ -21,21 +20,20 @@ namespace RateMyFood.API.Controllers
         #endregion
 
         #region add 
-        /// <summary>
-        /// Add a restaurant (Admin)
-        /// </summary>
-        /// <param name="restaurant">The Restaurant Object</param>
-        /// <returns>An IActionResult containing a string</returns>
-        /// <response code="200">Returns string</response>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+       /// <summary>
+       /// Add a new restaurant
+       /// </summary>
+       /// <param name="restaurant"></param>
+       /// <returns></returns>
+       
+        [ProducesResponseType(statusCode : StatusCodes.Status201Created, type:typeof(Restaurant))]
         [HttpPost]
         //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddRestaurant(Restaurant restaurant)
         {
             await _restaurantService.AddRestaurantAsync(restaurant);
-            return Ok("Restaurant Created");
+
+            return CreatedAtRoute("GetSingleRestaurant", restaurant.Id.ToString(), restaurant);
         }
         #endregion
 
@@ -44,9 +42,7 @@ namespace RateMyFood.API.Controllers
         /// Get info of all restaurants
         /// </summary>
         /// <returns>An IActionResult with restaurant list</returns>
-        /// <response code="200">Returns list of restaurant</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet]
         public async Task<IActionResult> GetRestaurants()
         {
@@ -61,9 +57,7 @@ namespace RateMyFood.API.Controllers
         /// </summary>
         /// <param name="restaurantName">The search string</param>
         /// <returns>An IActionResult containing matched restaurants</returns>
-        /// <response code="200">Returns list of restaurant</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("search")]
         public async Task<IActionResult> SearchRestaurant([FromQuery] string restaurantName)
         {
@@ -79,9 +73,7 @@ namespace RateMyFood.API.Controllers
         /// </summary>
         /// <param name="id">The Id of restaurant</param>
         /// <returns>An IActionResult contanining the restaurant</returns>
-        /// <response code="200">Returns restaurant object</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("{id}", Name = "GetSingleRestaurant")]
         public async Task<IActionResult> GetSingleRestaurant([FromRoute] string id)
         {
@@ -97,10 +89,7 @@ namespace RateMyFood.API.Controllers
         /// <param name="id">The Id of restaurant</param>
         /// <param name="restaurantDto">The object of updated restaurant</param>
         /// <returns>An IActionResult</returns>
-        /// <response code="204">Returns No Content</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateRestaurant(string id, 
@@ -117,10 +106,7 @@ namespace RateMyFood.API.Controllers
         /// </summary>
         /// <param name="id">The Id of restaurant</param>
         /// <returns>An IActionResult</returns>
-        /// <response code="204">Returns No Content</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteRestaurant(string id)
