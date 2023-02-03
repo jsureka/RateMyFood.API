@@ -81,7 +81,7 @@ namespace RateMyFood.API.Controllers
         /// </summary>
         /// <returns>An IActionResult containing the users</returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [Authorize(Policy = "MustBeAdmin")]
+        //[Authorize(Policy = "MustBeAdmin")]
         [HttpGet]
         public async Task<IActionResult> GetUser()
         {

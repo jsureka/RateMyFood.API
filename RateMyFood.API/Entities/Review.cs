@@ -1,13 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RateMyFood.API.Models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RateMyFood.API.Entities
 {
-    public class Review
+    public class Review : BaseEntity
     {
-        [Key]
-        public Guid Id { get; set; }
-
         [Required]
         [Range(0, 10)]
         public double Rating { get; set;}

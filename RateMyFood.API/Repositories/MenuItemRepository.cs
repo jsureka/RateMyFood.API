@@ -4,40 +4,14 @@ using RateMyFood.API.Entities;
 
 namespace RateMyFood.API.Repositories
 {
-    public class MenuItemRepository : IMenuItemRepository
+    public class MenuItemRepository : BaseRepository<MenuItem>, IMenuItemRepository
     {
         private readonly RateMyFoodContext _rateMyFoodContext;
 
-        public MenuItemRepository( RateMyFoodContext rateMyFoodContext)
+        public MenuItemRepository( RateMyFoodContext rateMyFoodContext) : base(rateMyFoodContext)
         {
             _rateMyFoodContext = rateMyFoodContext 
                 ?? throw new ArgumentNullException(nameof(rateMyFoodContext));
-        }
-
-        public async Task AddAsync(MenuItem menuItem)
-        {
-             _rateMyFoodContext.MenuItems.Add(menuItem);
-            await SaveChangesAsync();
-        }
-
-        public async Task DeleteAsync(string id)
-        {
-            var menuItem = await GetById(id);
-            _rateMyFoodContext.MenuItems.Remove(menuItem);
-            SaveChangesAsync();
-        }
-
-        public Task<List<MenuItem>> Get()
-        {
-            var menuItems = _rateMyFoodContext.MenuItems.ToListAsync();
-            return menuItems;
-        }
-
-        public async Task<MenuItem> GetById(string id)
-        {
-            var menuItem = await _rateMyFoodContext.MenuItems.
-                Where(c => c.Id.ToString() == id).FirstOrDefaultAsync();
-            return menuItem;
         }
 
         public async Task<List<MenuItem>> GetByRestaurant(string restaurantId)
@@ -49,7 +23,7 @@ namespace RateMyFood.API.Repositories
 
         public async Task Update(string id, MenuItem menuItemToUpdate)
         {
-            var res = await GetById(id);
+            var res =  GetById(id);
             if (res == null)
             {
                 throw new KeyNotFoundException("Item Not Found");
@@ -58,11 +32,5 @@ namespace RateMyFood.API.Repositories
             res.Description = menuItemToUpdate.Description;
             await _rateMyFoodContext.SaveChangesAsync();
         }
-
-        public async Task<bool> SaveChangesAsync()
-        {
-            return (await _rateMyFoodContext.SaveChangesAsync() >= 0) ;
-        }
-
     }
 }

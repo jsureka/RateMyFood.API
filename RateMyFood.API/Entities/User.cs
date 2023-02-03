@@ -1,12 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RateMyFood.API.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace RateMyFood.API.Entities
 {
-    public class User
+    public class User : BaseEntity
     {
-        [Key]
-        public Guid Id { get; set; }
-
         [MaxLength(200)]
         public string? UserName { get; set; }
 

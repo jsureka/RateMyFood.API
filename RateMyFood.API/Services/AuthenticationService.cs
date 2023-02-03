@@ -88,7 +88,7 @@ namespace RateMyFood.API.Services
         #region get single user
         public async Task<User> GetUserAsync(string id)
         {
-            return await _authenticationRepository.GetById(id);
+            return  _authenticationRepository.GetById(id);
         }
         #endregion
 
@@ -133,6 +133,18 @@ namespace RateMyFood.API.Services
             await SaveChangesAsync();
             return true;
         }
+
+        //private async Task UpdateValidation(User user, User olduser)
+        //{
+        //    if (user == null)
+        //    {
+        //        throw new Exception("User is null");
+        //    }
+        //    else if(user.Email != olduser.Email)
+        //    {
+        //        throw new Exception("Email cannot be changed");
+        //    }
+        //}
         #endregion
     }
 }

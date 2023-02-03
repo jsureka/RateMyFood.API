@@ -28,19 +28,19 @@ namespace RateMyFood.API.Services
             {
                 throw new UnauthorizedAccessException();
             }
-            await _menuItemRepository.AddAsync(menuItem);
+             _menuItemRepository.Add(menuItem);
             await _menuItemRepository.SaveChangesAsync(); 
 
         }
 
         public async Task DeleteMenuItemAsync(string menuItemId)
         {
-            var menuItem = await  _menuItemRepository.GetById(menuItemId);
+            var menuItem =   _menuItemRepository.GetById(menuItemId);
             if(menuItem == null)
             {
                 throw new NullReferenceException("Menu Item Not Found");
             }
-            await _menuItemRepository.DeleteAsync(menuItemId);
+             _menuItemRepository.Delete(menuItemId);
         }
 
         public async Task<List<MenuItem>> GetMenuItemAsync()
@@ -50,7 +50,7 @@ namespace RateMyFood.API.Services
 
         public async Task<MenuItem> GetMenuItemAsync(string id)
         {
-            return await _menuItemRepository.GetById(id);
+            return  _menuItemRepository.GetById(id);
         }
 
         public async Task<List<MenuItem>> GetMenuItemByRestaurantIdAsync(string restaurantId)
@@ -71,7 +71,7 @@ namespace RateMyFood.API.Services
 
         public async Task UpdateMenuItemAsync(string menuItemId, MenuItem menuItem)
         {
-            var item = await _menuItemRepository.GetById(menuItemId);
+            var item =  _menuItemRepository.GetById(menuItemId);
             if(item is null )
             {
                 throw new NullReferenceException("Menu Item Not Found");
